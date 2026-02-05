@@ -5,16 +5,10 @@
   "main": "dist/code.js",
   "capabilities": [],
   "enableProposedApi": false,
+  "permissions": ["currentuser"],
   "documentAccess": "dynamic-page",
-  "editorType": [
-    "figma",
-    "figjam"
-  ],
+  "editorType": ["figma", "figjam"],
   "containsWidget": true,
   "widgetApi": "1.0.0",
-  "networkAccess": {
-    "allowedDomains": [
-      "none"
-    ]
-  }
+  "networkAccess": { "allowedDomains": ["*"], "reasoning": "Cargar avatar del perfil de Figma (photoUrl del usuario actual)." }
 }
