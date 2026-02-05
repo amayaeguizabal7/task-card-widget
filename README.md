@@ -1,36 +1,43 @@
-Below are the steps to get your widget running. You can also find instructions at:
+# Task Card
+
+**Versión:** 1.0.0
+
+Widget de Figma que muestra una tarjeta de tarea editable con cabecera (nombre del proyecto, última actualización, link), bloques de Descripción, Fechas, Contactos, Recursos y Checklist, y un footer con avatar y badge de estado.
+
+## Cómo usar
+
+1. En Figma, inserta el widget **Task Card** en un frame.
+2. Edita los textos directamente en la tarjeta (nombre del proyecto, descripción, fechas, contactos, recursos, tareas).
+3. Usa el menú del widget (clic derecho o menú de propiedades) para cambiar el estado: WIP, REVIEW, APPROVED, BLOCKED, ARCHIVED, HANDOFF.
+4. Los enlaces "Añadir contacto", "Añadir recurso" y "Añadir tarea" permiten añadir filas; la ✕ elimina filas (en recursos, la primera solo se puede eliminar si tiene texto o hay más de una fila).
+
+## Desarrollo
+
+A continuación los pasos para tener el widget en marcha. Más información en:
 
 https://www.figma.com/widget-docs/setup-guide/
 
-This widget template uses TypeScript and NPM, two standard tools in creating JavaScript applications.
+Este widget usa TypeScript y NPM.
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+1. Instala [Node.js](https://nodejs.org/en/download/) (incluye NPM).
+2. En la raíz del proyecto, instala dependencias:
 
-https://nodejs.org/en/download/
+   ```bash
+   npm install
+   ```
 
-Next, install TypeScript, esbuild and the latest type definitions by running:
+3. Compila TypeScript a JavaScript:
 
-npm install
+   ```bash
+   npm run build
+   ```
 
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+   Para recompilar al guardar:
 
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+   ```bash
+   npm run watch
+   ```
 
-For more information, visit https://www.typescriptlang.org/
+4. En Figma: **Plugins > Development > Import plugin from manifest...** y selecciona el `manifest.json` de este proyecto.
 
-Using TypeScript requires a compiler to convert TypeScript (widget-src/code.tsx) into JavaScript (dist/code.js)
-for the browser to run. We use esbuild to do this for us.
-
-We recommend writing TypeScript code using Visual Studio code:
-
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-   then select "npm: watch". You will have to do this again every time
-   you reopen Visual Studio Code.
-
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+El código fuente está en `widget-src/code.tsx`; la salida en `dist/code.js`.
