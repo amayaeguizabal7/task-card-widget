@@ -53,6 +53,7 @@ function TaskCardWidget() {
   const [dateHandoff, setDateHandoff] = useSyncedState('dateHandoff', '')
   const [dateApproved, setDateApproved] = useSyncedState('dateApproved', '')
   const [linkLabel, setLinkLabel] = useSyncedState('linkLabel', '')
+  const [lastUpdated, setLastUpdated] = useSyncedState('lastUpdated', () => new Date().toISOString())
   const [taskDescription, setTaskDescription] = useSyncedState('taskDescription', '')
   const [resourcesVisible, setResourcesVisible] = useSyncedState('resourcesVisible', [true])
   const contactFields = useSyncedMap('contactFields')
@@ -76,10 +77,11 @@ function TaskCardWidget() {
     },
   )
 
-  const now = new Date()
+  const refreshLastUpdated = () => setLastUpdated(new Date().toISOString())
   const pad = (n: number) => n < 10 ? '0' + n : String(n)
-  const datePart = now.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
-  const timePart = `${pad(now.getHours())}:${pad(now.getMinutes())}h`
+  const lastUpdateDate = lastUpdated ? new Date(lastUpdated) : new Date()
+  const datePart = `${pad(lastUpdateDate.getDate())}/${pad(lastUpdateDate.getMonth() + 1)}/${lastUpdateDate.getFullYear()}`
+  const timePart = `${pad(lastUpdateDate.getHours())}:${pad(lastUpdateDate.getMinutes())}h`
   const lastUpdateStr = `${datePart}, ${timePart}`
 
   const addContact = () => setContactsVisible(prev => [...prev, true])
@@ -98,11 +100,14 @@ function TaskCardWidget() {
     setTasksVisible(prev => [...prev, true])
     setTaskChecked(prev => [...prev, false])
   }
-  const toggleTask = (index: number) => setTaskChecked(prev => {
-    const next = [...prev]
-    next[index] = !next[index]
-    return next
-  })
+  const toggleTask = (index: number) => {
+    setTaskChecked(prev => {
+      const next = [...prev]
+      next[index] = !next[index]
+      return next
+    })
+    refreshLastUpdated()
+  }
 
   return (
     <AutoLayout
@@ -136,7 +141,7 @@ function TaskCardWidget() {
             <Input
               name="title"
               value={projectName || null}
-              onTextEditEnd={(e) => setProjectName(e.characters)}
+              onTextEditEnd={(e) => { setProjectName(e.characters); refreshLastUpdated() }}
               placeholder="[Aquí el nombre del proyecto]"
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
@@ -188,7 +193,7 @@ function TaskCardWidget() {
             <Input
               name="link"
               value={linkLabel || null}
-              onTextEditEnd={(e) => setLinkLabel(e.characters)}
+              onTextEditEnd={(e) => { setLinkLabel(e.characters); refreshLastUpdated() }}
               placeholder="Link a la tarjeta"
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
@@ -244,7 +249,7 @@ function TaskCardWidget() {
             <Input
               name="description-text"
               value={taskDescription || null}
-              onTextEditEnd={(e) => setTaskDescription(e.characters)}
+              onTextEditEnd={(e) => { setTaskDescription(e.characters); refreshLastUpdated() }}
               placeholder="[Escribe la descripción de la tarea]"
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
@@ -291,7 +296,7 @@ function TaskCardWidget() {
               direction="horizontal"
               width="fill-parent"
               spacing={8}
-              verticalAlignItems="center"
+              verticalAlignItems="start"
             >
               <Text fontSize={20} fill="#111111">📅</Text>
               <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
@@ -301,7 +306,7 @@ function TaskCardWidget() {
                 <Input
                   name="date"
                   value={dateStart || null}
-                  onTextEditEnd={(e) => setDateStart(e.characters)}
+                  onTextEditEnd={(e) => { setDateStart(e.characters); refreshLastUpdated() }}
                   placeholder="[añadir la fecha de inicio]"
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
@@ -316,7 +321,7 @@ function TaskCardWidget() {
               direction="horizontal"
               width="fill-parent"
               spacing={8}
-              verticalAlignItems="center"
+              verticalAlignItems="start"
             >
               <Text fontSize={20} fill="#111111">✏️</Text>
               <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
@@ -326,7 +331,7 @@ function TaskCardWidget() {
                 <Input
                   name="date"
                   value={dateValidate || null}
-                  onTextEditEnd={(e) => setDateValidate(e.characters)}
+                  onTextEditEnd={(e) => { setDateValidate(e.characters); refreshLastUpdated() }}
                   placeholder="[añadir la fecha de entrega para validar]"
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
@@ -341,7 +346,7 @@ function TaskCardWidget() {
               direction="horizontal"
               width="fill-parent"
               spacing={8}
-              verticalAlignItems="center"
+              verticalAlignItems="start"
             >
               <Text fontSize={20} fill="#111111">✅</Text>
               <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
@@ -351,7 +356,7 @@ function TaskCardWidget() {
                 <Input
                   name="date"
                   value={dateApproved || null}
-                  onTextEditEnd={(e) => setDateApproved(e.characters)}
+                  onTextEditEnd={(e) => { setDateApproved(e.characters); refreshLastUpdated() }}
                   placeholder="[añadir la fecha de aprobación]"
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
@@ -366,7 +371,7 @@ function TaskCardWidget() {
               direction="horizontal"
               width="fill-parent"
               spacing={8}
-              verticalAlignItems="center"
+              verticalAlignItems="start"
             >
               <Text fontSize={20} fill="#111111">🚀</Text>
               <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
@@ -376,7 +381,7 @@ function TaskCardWidget() {
                 <Input
                   name="date"
                   value={dateHandoff || null}
-                  onTextEditEnd={(e) => setDateHandoff(e.characters)}
+                  onTextEditEnd={(e) => { setDateHandoff(e.characters); refreshLastUpdated() }}
                   placeholder="[añadir la fecha de handoff]"
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
@@ -448,7 +453,7 @@ function TaskCardWidget() {
                       <Input
                         name="name"
                         value={((contactFields.get(`${index}_name`) as string | undefined) ?? '') || null}
-                        onTextEditEnd={(e) => contactFields.set(`${index}_name`, e.characters)}
+                        onTextEditEnd={(e) => { contactFields.set(`${index}_name`, e.characters); refreshLastUpdated() }}
                         placeholder="[Nombre del/la profesional]"
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
@@ -461,7 +466,7 @@ function TaskCardWidget() {
                       <Input
                         name="rol"
                         value={((contactFields.get(`${index}_rol`) as string | undefined) ?? '') || null}
-                        onTextEditEnd={(e) => contactFields.set(`${index}_rol`, e.characters)}
+                        onTextEditEnd={(e) => { contactFields.set(`${index}_rol`, e.characters); refreshLastUpdated() }}
                         placeholder="[rol del/la profesional]"
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
@@ -473,7 +478,7 @@ function TaskCardWidget() {
                       <Input
                         name="email"
                         value={((contactFields.get(`${index}_email`) as string | undefined) ?? '') || null}
-                        onTextEditEnd={(e) => contactFields.set(`${index}_email`, e.characters)}
+                        onTextEditEnd={(e) => { contactFields.set(`${index}_email`, e.characters); refreshLastUpdated() }}
                         placeholder="[añadir email de la persona aquí]"
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
@@ -558,7 +563,7 @@ function TaskCardWidget() {
                     <Input
                       name="resource"
                       value={((resourceFields.get(`${index}_resource`) as string | undefined) ?? '') || null}
-                      onTextEditEnd={(e) => resourceFields.set(`${index}_resource`, e.characters)}
+                      onTextEditEnd={(e) => { resourceFields.set(`${index}_resource`, e.characters); refreshLastUpdated() }}
                       placeholder="[recurso]"
                       placeholderProps={{ opacity: 0.7 }}
                       width="fill-parent"
@@ -673,7 +678,7 @@ function TaskCardWidget() {
                       <Input
                         name="label"
                         value={((taskFields.get(`${index}_label`) as string | undefined) ?? '') || null}
-                        onTextEditEnd={(e) => taskFields.set(`${index}_label`, e.characters)}
+                        onTextEditEnd={(e) => { taskFields.set(`${index}_label`, e.characters); refreshLastUpdated() }}
                         placeholder="[Tarea]"
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
@@ -685,7 +690,7 @@ function TaskCardWidget() {
                       <Input
                         name="secondary-text"
                         value={((taskFields.get(`${index}_secondary`) as string | undefined) ?? '') || null}
-                        onTextEditEnd={(e) => taskFields.set(`${index}_secondary`, e.characters)}
+                        onTextEditEnd={(e) => { taskFields.set(`${index}_secondary`, e.characters); refreshLastUpdated() }}
                         placeholder=""
                         width="fill-parent"
                         fontSize={14}
