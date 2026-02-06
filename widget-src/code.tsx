@@ -35,14 +35,14 @@ const borderGradient: WidgetJSX.GradientPaint = {
     { x: 1, y: 0 },
   ],
   gradientStops: [
-    { position: 0, color: { r: 0.236, g: 0.53, b: 0.964, a: 1 } },   // hsla(217, 91%, 60%, 1)
-    { position: 0.5, color: { r: 0.646, g: 0.3, b: 0.97, a: 1 } },   // hsla(271, 91%, 65%, 1)
-    { position: 1, color: { r: 0.924, g: 0.276, b: 0.535, a: 1 } },  // hsla(330, 81%, 60%, 1)
+    { position: 0, color: { r: 0.236, g: 0.53, b: 0.964, a: 1 } },
+    { position: 0.5, color: { r: 0.646, g: 0.3, b: 0.97, a: 1 } },
+    { position: 1, color: { r: 0.924, g: 0.276, b: 0.535, a: 1 } },
   ],
 }
 
 function TaskCardWidget() {
-  const [contactsVisible, setContactsVisible] = useSyncedState('contactsVisible', [true, true, true])
+  const [contactsVisible, setContactsVisible] = useSyncedState('contactsVisible', [true])
   const [tasksVisible, setTasksVisible] = useSyncedState('tasksVisible', [true])
   const [taskChecked, setTaskChecked] = useSyncedState('taskChecked', [false])
   const [currentUserPhoto] = useSyncedState('currentUserPhoto', () => figma.currentUser?.photoUrl ?? null)
@@ -94,6 +94,11 @@ function TaskCardWidget() {
   const hideResource = (index: number) => setResourcesVisible(prev => {
     const next = [...prev]
     next[index] = false
+    const visibleCount = next.filter(Boolean).length
+    if (visibleCount === 0) {
+      resourceFields.delete('0_resource')
+      return [true]
+    }
     return next
   })
   const addTask = () => {
@@ -593,7 +598,7 @@ function TaskCardWidget() {
           </AutoLayout>
         </AutoLayout>
 
-        {/* Bloque lista de tareas */}
+        {/* Bloque Checklist */}
         <AutoLayout
           name="checklist"
           direction="vertical"
@@ -714,9 +719,9 @@ function TaskCardWidget() {
 
       <AutoLayout
         name="footer"
-          direction="horizontal"
-          width="fill-parent"
-          padding={48}
+        direction="horizontal"
+        width="fill-parent"
+        padding={48}
         verticalAlignItems="center"
         spacing={16}
       >
