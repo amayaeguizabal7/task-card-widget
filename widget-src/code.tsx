@@ -96,7 +96,8 @@ function TaskCardWidget() {
     next[index] = false
     const visibleCount = next.filter(Boolean).length
     if (visibleCount === 0) {
-      resourceFields.delete('0_resource')
+      resourceFields.delete('0_name')
+      resourceFields.delete('0_url')
       return [true]
     }
     return next
@@ -151,6 +152,7 @@ function TaskCardWidget() {
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
             />
@@ -164,6 +166,7 @@ function TaskCardWidget() {
             <Text
               name="text"
               fontSize={16}
+              lineHeight={24}
               fill="#555555"
             >
               Última actualización:
@@ -171,6 +174,7 @@ function TaskCardWidget() {
             <Text
               name="update-date"
               fontSize={16}
+              lineHeight={24}
               fill="#555555"
             >
               {lastUpdateStr}
@@ -191,7 +195,7 @@ function TaskCardWidget() {
           verticalAlignItems="center"
           minWidth={212}
         >
-          <Text name="icon" fontSize={18} fill="#0A6BFF">
+          <Text name="icon" fontSize={18} lineHeight={26} fill="#0A6BFF">
             🔗
           </Text>
           <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
@@ -203,6 +207,7 @@ function TaskCardWidget() {
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
               fontSize={18}
+              lineHeight={26}
               fontWeight="bold"
               fill="#0A6BFF"
               textDecoration="underline"
@@ -244,6 +249,7 @@ function TaskCardWidget() {
             <Text
               name="title"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
             >
@@ -259,6 +265,7 @@ function TaskCardWidget() {
               placeholderProps={{ opacity: 0.7 }}
               width="fill-parent"
               fontSize={20}
+              lineHeight={28}
               fill="#555555"
             />
           </AutoLayout>
@@ -283,6 +290,7 @@ function TaskCardWidget() {
             <Text
               name="title"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
             >
@@ -303,8 +311,8 @@ function TaskCardWidget() {
               spacing={8}
               verticalAlignItems="start"
             >
-              <Text fontSize={20} fill="#111111">📅</Text>
-              <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
+              <Text fontSize={20} lineHeight={28} fill="#111111">📅</Text>
+              <Text name="text" width={140} fontSize={20} lineHeight={28} fontWeight="bold" fill="#111111">
                 Inicio:
               </Text>
               <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
@@ -316,6 +324,7 @@ function TaskCardWidget() {
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
                   fontSize={20}
+                  lineHeight={28}
                   fill="#555555"
                 />
               </AutoLayout>
@@ -328,8 +337,8 @@ function TaskCardWidget() {
               spacing={8}
               verticalAlignItems="start"
             >
-              <Text fontSize={20} fill="#111111">✏️</Text>
-              <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
+              <Text fontSize={20} lineHeight={28} fill="#111111">✏️</Text>
+              <Text name="text" width={140} fontSize={20} lineHeight={28} fontWeight="bold" fill="#111111">
                 Para validar:
               </Text>
               <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
@@ -341,6 +350,7 @@ function TaskCardWidget() {
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
                   fontSize={20}
+                  lineHeight={28}
                   fill="#555555"
                 />
               </AutoLayout>
@@ -353,8 +363,8 @@ function TaskCardWidget() {
               spacing={8}
               verticalAlignItems="start"
             >
-              <Text fontSize={20} fill="#111111">✅</Text>
-              <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
+              <Text fontSize={20} lineHeight={28} fill="#111111">✅</Text>
+              <Text name="text" width={140} fontSize={20} lineHeight={28} fontWeight="bold" fill="#111111">
                 Aprobado:
               </Text>
               <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
@@ -366,6 +376,7 @@ function TaskCardWidget() {
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
                   fontSize={20}
+                  lineHeight={28}
                   fill="#555555"
                 />
               </AutoLayout>
@@ -378,8 +389,8 @@ function TaskCardWidget() {
               spacing={8}
               verticalAlignItems="start"
             >
-              <Text fontSize={20} fill="#111111">🚀</Text>
-              <Text name="text" width={140} fontSize={20} fontWeight="bold" fill="#111111">
+              <Text fontSize={20} lineHeight={28} fill="#111111">🚀</Text>
+              <Text name="text" width={140} fontSize={20} lineHeight={28} fontWeight="bold" fill="#111111">
                 Handoff:
               </Text>
               <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
@@ -391,6 +402,7 @@ function TaskCardWidget() {
                   placeholderProps={{ opacity: 0.7 }}
                   width="fill-parent"
                   fontSize={20}
+                  lineHeight={28}
                   fill="#555555"
                 />
               </AutoLayout>
@@ -419,6 +431,7 @@ function TaskCardWidget() {
             <Text
               name="title"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
               width="fill-parent"
@@ -428,6 +441,7 @@ function TaskCardWidget() {
             <Text
               name="add-contact"
               fontSize={16}
+              lineHeight={24}
               fontWeight="bold"
               fill="#0A6BFF"
               textDecoration="underline"
@@ -453,7 +467,7 @@ function TaskCardWidget() {
                   spacing={12}
                   verticalAlignItems="center"
                 >
-                  <AutoLayout name="info" direction="vertical" width="fill-parent" spacing={12}>
+                  <AutoLayout name="info" direction="vertical" width="fill-parent" spacing={8}>
                     <AutoLayout name="editable-text" direction="vertical" width="fill-parent">
                       <Input
                         name="name"
@@ -463,6 +477,7 @@ function TaskCardWidget() {
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
                         fontSize={20}
+                        lineHeight={28}
                         fontWeight="bold"
                         fill="#111111"
                       />
@@ -476,6 +491,7 @@ function TaskCardWidget() {
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
                         fontSize={16}
+                        lineHeight={24}
                         fill="#555555"
                       />
                     </AutoLayout>
@@ -488,6 +504,7 @@ function TaskCardWidget() {
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
                         fontSize={20}
+                        lineHeight={28}
                         fill="#0A6BFF"
                         textDecoration="underline"
                       />
@@ -497,6 +514,7 @@ function TaskCardWidget() {
                     <Text
                       name="remove"
                       fontSize={18}
+                      lineHeight={26}
                       fontWeight={800}
                       fill="#666666"
                       onClick={() => hideContact(index)}
@@ -531,6 +549,7 @@ function TaskCardWidget() {
             <Text
               name="title"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
               width="fill-parent"
@@ -540,6 +559,7 @@ function TaskCardWidget() {
             <Text
               name="link"
               fontSize={16}
+              lineHeight={24}
               fontWeight="bold"
               fill="#0A6BFF"
               textDecoration="underline"
@@ -564,27 +584,40 @@ function TaskCardWidget() {
                   spacing={12}
                   verticalAlignItems="center"
                 >
-                  <AutoLayout name="editable-text" direction="vertical" width="fill-parent">
+                  <AutoLayout name="editable-text" direction="vertical" width="fill-parent" spacing={8}>
                     <Input
-                      name="resource"
-                      value={((resourceFields.get(`${index}_resource`) as string | undefined) ?? '') || null}
-                      onTextEditEnd={(e) => { resourceFields.set(`${index}_resource`, e.characters); refreshLastUpdated() }}
-                      placeholder="[recurso]"
+                      name="resource-name"
+                      value={((resourceFields.get(`${index}_name`) as string | undefined) ?? '') || null}
+                      onTextEditEnd={(e) => { resourceFields.set(`${index}_name`, e.characters); refreshLastUpdated() }}
+                      placeholder="[Nombre del recurso]"
                       placeholderProps={{ opacity: 0.7 }}
                       width="fill-parent"
                       fontSize={20}
+                      lineHeight={28}
+                      fill="#111111"
+                    />
+                    <Input
+                      name="resource-url"
+                      value={((resourceFields.get(`${index}_url`) as string | undefined) ?? '') || null}
+                      onTextEditEnd={(e) => { resourceFields.set(`${index}_url`, e.characters); refreshLastUpdated() }}
+                      placeholder="[url del recurso]"
+                      placeholderProps={{ opacity: 0.7 }}
+                      width="fill-parent"
+                      fontSize={20}
+                      lineHeight={28}
                       fill="#0A6BFF"
                       textDecoration="underline"
                     />
                   </AutoLayout>
                   {(index > 0 ||
                     (index === 0 &&
-                      ((((resourceFields.get('0_resource') as string | undefined) ?? '').trim()
-                        .length > 0) ||
+                      (((resourceFields.get('0_name') as string | undefined) ?? '').trim().length > 0 ||
+                        ((resourceFields.get('0_url') as string | undefined) ?? '').trim().length > 0 ||
                         resourcesVisible.filter(Boolean).length > 1))) && (
                     <Text
                       name="remove"
                       fontSize={18}
+                      lineHeight={26}
                       fontWeight={800}
                       fill="#666666"
                       onClick={() => hideResource(index)}
@@ -621,6 +654,7 @@ function TaskCardWidget() {
             <Text
               name="title"
               fontSize={24}
+              lineHeight={32}
               fontWeight="bold"
               fill="#111111"
               width="fill-parent"
@@ -630,6 +664,7 @@ function TaskCardWidget() {
             <Text
               name="add-task"
               fontSize={16}
+              lineHeight={24}
               fontWeight="bold"
               fill="#0A6BFF"
               textDecoration="underline"
@@ -668,7 +703,7 @@ function TaskCardWidget() {
                     onClick={() => toggleTask(index)}
                   >
                     {taskChecked[index] && (
-                      <Text fontSize={14} fontWeight="bold" fill="#FFFFFF">
+                      <Text fontSize={14} lineHeight={22} fontWeight="bold" fill="#FFFFFF">
                         ✓
                       </Text>
                     )}
@@ -688,6 +723,7 @@ function TaskCardWidget() {
                         placeholderProps={{ opacity: 0.7 }}
                         width="fill-parent"
                         fontSize={20}
+                        lineHeight={28}
                         fill="#111111"
                       />
                     </AutoLayout>
@@ -699,6 +735,7 @@ function TaskCardWidget() {
                         placeholder=""
                         width="fill-parent"
                         fontSize={14}
+                        lineHeight={22}
                         fill="#555555"
                       />
                     </AutoLayout>
@@ -763,7 +800,7 @@ function TaskCardWidget() {
           verticalAlignItems="center"
         >
           <Ellipse width={8} height={8} fill={STATUS_BADGES[statusKey]?.dot ?? STATUS_BADGES.WIP.dot} />
-          <Text fontSize={12} fontWeight="bold" fill={STATUS_BADGES[statusKey]?.text ?? STATUS_BADGES.WIP.text}>
+          <Text fontSize={12} lineHeight={20} fontWeight="bold" fill={STATUS_BADGES[statusKey]?.text ?? STATUS_BADGES.WIP.text}>
             {STATUS_BADGES[statusKey]?.label ?? 'WIP'}
           </Text>
         </AutoLayout>
