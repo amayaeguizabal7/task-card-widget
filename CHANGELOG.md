@@ -6,7 +6,7 @@ Todos los cambios notables del proyecto se documentan en este archivo.
 
 ### Añadido
 
-- Tarjeta de tarea (Task Card) con cabecera: nombre del proyecto, última actualización, pill "Link a la tarjeta".
+- Tarjeta de tarea (Task Card) con cabecera: nombre del proyecto y última actualización.
 - Bloque **Descripción** con texto editable.
 - Bloque **Fechas**: Inicio, Para validar, Aprobado, Handoff (todos editables).
 - Bloque **Contactos** con "Añadir contacto"; cada contacto: nombre, rol, email (editables) y opción de eliminar.

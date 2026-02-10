@@ -52,7 +52,6 @@ function TaskCardWidget() {
   const [dateValidate, setDateValidate] = useSyncedState('dateValidate', '')
   const [dateHandoff, setDateHandoff] = useSyncedState('dateHandoff', '')
   const [dateApproved, setDateApproved] = useSyncedState('dateApproved', '')
-  const [linkLabel, setLinkLabel] = useSyncedState('linkLabel', '')
   const [lastUpdated, setLastUpdated] = useSyncedState('lastUpdated', () => new Date().toISOString())
   const [taskDescription, setTaskDescription] = useSyncedState('taskDescription', '')
   const [resourcesVisible, setResourcesVisible] = useSyncedState('resourcesVisible', [true])
@@ -179,39 +178,6 @@ function TaskCardWidget() {
             >
               {lastUpdateStr}
             </Text>
-          </AutoLayout>
-        </AutoLayout>
-
-        <AutoLayout
-          name="pill-link"
-          direction="horizontal"
-          padding={{ top: 16, right: 24, bottom: 16, left: 24 }}
-          spacing={8}
-          cornerRadius={100}
-          fill={{ r: 0.902, g: 0.976, b: 0.992, a: 0.5 }}
-          stroke="#89E3F6"
-          strokeWidth={1}
-          strokeAlign="inside"
-          verticalAlignItems="center"
-          minWidth={212}
-        >
-          <Text name="icon" fontSize={18} lineHeight={26} fill="#0A6BFF">
-            🔗
-          </Text>
-          <AutoLayout name="editable-text" direction="horizontal" width="fill-parent">
-            <Input
-              name="link"
-              value={linkLabel || null}
-              onTextEditEnd={(e) => { setLinkLabel(e.characters); refreshLastUpdated() }}
-              placeholder="Link a la tarjeta"
-              placeholderProps={{ opacity: 0.7 }}
-              width="fill-parent"
-              fontSize={18}
-              lineHeight={26}
-              fontWeight="bold"
-              fill="#0A6BFF"
-              textDecoration="underline"
-            />
           </AutoLayout>
         </AutoLayout>
       </AutoLayout>
