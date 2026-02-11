@@ -1,10 +1,9 @@
 const { widget } = figma
 const { AutoLayout, Text, Rectangle, Ellipse, Image, Input, useSyncedState, useSyncedMap, usePropertyMenu } = widget
 
-// Opciones de badge de estado (footer)
 const STATUS_BADGES: Record<string, { bg: string; dot: string; text: string; label: string }> = {
   WIP: { bg: '#F5D000', dot: '#111111', text: '#111111', label: 'WIP' },
-  REVIEW: { bg: '#E1BEE7', dot: '#283593', text: '#283593', label: 'REVIEW' },
+  'READY TO VALIDATE': { bg: '#E1BEE7', dot: '#283593', text: '#283593', label: 'READY TO VALIDATE' },
   APPROVED: { bg: '#4CAF50', dot: '#FFFFFF', text: '#FFFFFF', label: 'APPROVED' },
   BLOCKED: { bg: '#E53935', dot: '#FFFFFF', text: '#FFFFFF', label: 'BLOCKED' },
   ARCHIVED: { bg: '#E0E0E0', dot: '#616161', text: '#616161', label: 'ARCHIVED' },
@@ -12,7 +11,6 @@ const STATUS_BADGES: Record<string, { bg: string; dot: string; text: string; lab
 }
 const STATUS_KEYS = Object.keys(STATUS_BADGES)
 
-// Degradado suave rosa/lila → celeste para la cabecera (normalized 0–1)
 const headerGradient: WidgetJSX.GradientPaint = {
   type: 'gradient-linear',
   gradientHandlePositions: [
@@ -26,7 +24,6 @@ const headerGradient: WidgetJSX.GradientPaint = {
   ],
 }
 
-// Borde del contenedor: degradado lineal azul → púrpura → rosa (HSLA del diseño)
 const borderGradient: WidgetJSX.GradientPaint = {
   type: 'gradient-linear',
   gradientHandlePositions: [
@@ -196,7 +193,6 @@ function TaskCardWidget() {
         padding={24}
         spacing={12}
       >
-        {/* Bloque descripción de la tarea */}
         <AutoLayout
           name="description"
           direction="vertical"
@@ -237,7 +233,6 @@ function TaskCardWidget() {
           </AutoLayout>
         </AutoLayout>
 
-        {/* Bloque de fechas */}
         <AutoLayout
           name="dates"
           direction="vertical"
@@ -376,7 +371,6 @@ function TaskCardWidget() {
           </AutoLayout>
         </AutoLayout>
 
-        {/* Bloque de contactos */}
         <AutoLayout
           name="contacts"
           direction="vertical"
@@ -494,7 +488,6 @@ function TaskCardWidget() {
           </AutoLayout>
         </AutoLayout>
 
-        {/* Bloque Recursos */}
         <AutoLayout
           name="resources"
           direction="vertical"
@@ -597,7 +590,6 @@ function TaskCardWidget() {
           </AutoLayout>
         </AutoLayout>
 
-        {/* Bloque Checklist */}
         <AutoLayout
           name="checklist"
           direction="vertical"
